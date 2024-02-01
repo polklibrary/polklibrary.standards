@@ -1,0 +1,46 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="polklibrary.standards">
+
+  <!-- Set overrides folder for Just-a-Bunch-Of-Templates product -->
+  <include package="z3c.jbot" file="meta.zcml" />
+  <browser:jbot
+      directory="overrides"
+      layer="polklibrary.standards.interfaces.IPolklibraryStandardsLayer"
+      />
+    
+    <browser:page
+        for="polklibrary.standards.models.site_messages.ISiteMessage"
+        name="sitemessage_view"
+        class=".sitemessage_view.SiteMessageView"
+        permission="zope2.View"
+        />
+        
+    <browser:page
+        for="*"
+        name="sitemessages.js"
+        class=".sitemessage_view.SiteMessageJS"
+        permission="zope2.View"
+        />
+        
+        
+        
+    <browser:page
+        for="Products.CMFCore.interfaces.ISiteRoot"
+        name="user_check"
+        class=".user_check.UserCheckView"
+        permission="cmf.ManagePortal"
+        />
+        
+
+  <!-- Publish static files -->
+  <plone:static
+      name="polklibrary.standards"
+      type="plone"
+      directory="static"
+      />
+      
+
+</configure>

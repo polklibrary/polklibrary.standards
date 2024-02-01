@@ -1,0 +1,31 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="plone"
+	  lang="en">
+<body>
+
+    <metal:block fill-slot="javascript_head_slot">
+        
+    </metal:block>
+	<metal:block fill-slot="style_slot">
+        
+    </metal:block>
+    
+    <metal:content-title fill-slot="content-title" >
+        <h1 class="documentFirstHeading">${context/Title}</h1>
+    </metal:content-title>
+        
+	<metal:content fill-slot="content-core">
+        
+        <div id="sitemessage-view" class="column">
+            <div tal:content="structure context/body/output|nothing">
+            </div>
+        </div>
+        
+        
+	</metal:content>
+
+</body>
+</html>

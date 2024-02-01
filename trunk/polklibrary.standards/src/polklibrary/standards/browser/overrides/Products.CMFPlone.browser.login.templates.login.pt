@@ -1,0 +1,71 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      i18n:domain="plone"
+      metal:use-macro="here/main_template/macros/master"
+>
+<body>
+  <metal:main fill-slot="main">
+    <metal:main-macro define-macro="main">
+
+      <div id="login-form">
+
+        <div class="portalMessage error pat-cookietrigger" style="display:none">
+            <strong i18n:translate="">
+                Error
+            </strong>
+            <span tal:omit-tag=""
+                i18n:translate="enable_cookies_message_before_login">
+                Cookies are not enabled. You must enable cookies before you can log in.
+            </span>
+        </div>
+        
+        <div id="login-logo">
+            <img src="++plone++polklibrary.standards/netid.png" alt="NetID Login" />
+        </div>
+
+        <form action="." method="post"
+              tal:attributes="action view/action; enctype view/enctype">
+              
+            <div>
+                <div class="field">
+                    <label for="__ac_name">
+                        <span>NetID</span>
+                        <span class="required horizontal" title="Required">&nbsp;</span>
+                    </label>
+                    <div class="widget">
+                        <input id="__ac_name" name="__ac_name" class="text-widget required textline-field" value="" type="text" /><b class="netid-email-sect">@uwosh.edu</b>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="field">
+                    <label for="__ac_password">
+                        <span>Password</span>
+                        <span class="required horizontal" title="Required">&nbsp;</span>
+                    </label>
+                    <div class="widget">
+                        <input id="__ac_password" name="__ac_password" class="password-widget required password-field" type="password" />
+                    </div>
+                </div>
+            </div>
+            <input id="came_from" name="came_from" class="hidden-widget" type="hidden"
+                tal:attributes="value python:request.form.get('came_from','')" />
+            
+            <span tal:replace="structure context/@@authenticator/authenticator"/>
+
+            <div class="formControls">
+              <tal:actions tal:repeat="action view/actions/values|nothing">
+                <input type="submit" tal:replace="structure action/render" />
+              </tal:actions>
+            </div>
+            
+        </form>
+
+      </div>
+    </metal:main-macro>
+  </metal:main>
+</body>
+</html>

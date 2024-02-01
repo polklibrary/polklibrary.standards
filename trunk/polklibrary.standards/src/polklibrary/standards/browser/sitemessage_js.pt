@@ -1,0 +1,17 @@
+window.${view/js_thread_name} = setInterval(function(){
+    if (document.body != null){
+        var data = ${view/jdata};
+        for(var i in data.messages){
+            var a = document.createElement('a');
+            a.className = 'site-message ' + 'site-message-color-' + data.messages[i].color;
+            a.href = data.messages[i].url;
+            a.innerHTML = data.messages[i].title;
+            document.body.insertBefore(a, document.body.firstChild);            
+            if (document.body.dataset.siteMessages > 0)
+                document.body.dataset.siteMessages = parseInt(document.body.dataset.siteMessages) + 1;
+            else
+                document.body.dataset.siteMessages = 1;
+        }
+        clearInterval(window.${view/js_thread_name});
+    }
+}, 100);
